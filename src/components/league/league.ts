@@ -16,6 +16,16 @@ export interface Team {
   Wins: number;
 }
 
+export interface TeamStatsItem {
+  GlobalTeamID: number;
+  TeamID: number;
+  HomeWins: number;
+  HomeLosses: number;
+  Wins: number;
+  Losses: number;
+  Streak: number;
+}
+
 export interface Conference {
   ConferenceID: number;
   ConferenceName: string;

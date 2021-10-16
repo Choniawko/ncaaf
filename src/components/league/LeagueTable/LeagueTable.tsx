@@ -1,38 +1,27 @@
-import { FC, useState } from "react";
-import { useQuery } from "react-query";
+import { FC } from "react";
 import { useTable } from "react-table";
-import { getLeagueHierarchy } from "../service";
-import { Conference } from "./league";
-import { ConferenceRow } from "./ConferenceRow/ConferenceRow";
+import { Team } from "../league";
+import { useTeamStatsService } from "../LeagueOverview/teamStatsService";
 import * as S from "./LeagueTable.styles";
+import { columns, getTableData } from "./LeagueTable.utils";
 
-const columns = ["Team", "Conf", "Overall", "Home", "Away", "Strk"].map((name) => ({
-  Header: name,
-  accessor: name.toLowerCase(),
-}));
-
-interface Props {}
-export const LeagueTable: FC<Props> = () => {
-  const { data: conferences } = useQuery<Conference[]>("LeagueHierarchy", getLeagueHierarchy);
-  const [currentConf, setCurrentConf] = useState(0);
+interface Props {
+  teams: Team[];
+}
+export const LeagueTable: FC<Props> = ({ teams }) => {
+  const { getTeamStatsById } = useTeamStatsService();
+  const teamsWithStats = teams.map((team) => ({
+    ...team,
+    ...getTeamStatsById(team.TeamID),
+  }));
 
   const { getTableProps, rows, headerGroups, prepareRow } = useTable({
     columns: columns as any,
-    data:
-      (conferences &&
-        conferences[currentConf].Teams.map(
-          ({ Name, TeamLogoUrl, ConferenceWins, ConferenceLosses, Wins, Losses }) => ({
-            team: Name,
-            TeamLogoUrl,
-            conf: `${ConferenceWins} - ${ConferenceLosses}`,
-            overall: `${Wins} - ${Losses}`,
-          }),
-        )) ||
-      [],
+    data: getTableData(teamsWithStats),
   });
+
   return (
     <S.Container>
-      <ConferenceRow conferences={conferences || []} {...{ currentConf, setCurrentConf }} />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -46,7 +35,6 @@ export const LeagueTable: FC<Props> = () => {
         <tbody {...getTableProps()}>
           {rows.map((row: any) => {
             prepareRow(row);
-            console.log(row);
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any, index: number) => {

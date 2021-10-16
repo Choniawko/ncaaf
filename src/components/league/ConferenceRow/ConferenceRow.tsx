@@ -1,12 +1,11 @@
 import { FC, useRef } from "react";
 import { useVirtual } from "react-virtual";
-import { Conference } from "../league";
 import * as S from "./ConferenceRow.styles";
 
 interface Props {
-  conferences: Conference[];
-  currentConf: number;
-  setCurrentConf: (index: number) => void;
+  conferences: string[];
+  currentConf: string;
+  setCurrentConf: (name: string) => void;
 }
 export const ConferenceRow: FC<Props> = ({ conferences, setCurrentConf, currentConf }) => {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -17,17 +16,18 @@ export const ConferenceRow: FC<Props> = ({ conferences, setCurrentConf, currentC
   });
   return (
     <S.Container ref={parentRef}>
-      <S.List width={`${columnVirtualizer.totalSize + 20 * conferences.length}px`}>
+      <S.List role='list' width={`${columnVirtualizer.totalSize + 20 * conferences.length}px`}>
         {columnVirtualizer.virtualItems.map((virtualColumn) => {
           return (
             <S.ListItem
+              role='listitem'
               key={virtualColumn.index}
               ref={virtualColumn.measureRef}
               transform={`translateX(${virtualColumn.start + 20 * virtualColumn.index}px)`}
-              isCurrentConf={currentConf === virtualColumn.index}
-              onClick={() => setCurrentConf(virtualColumn.index)}
+              isCurrentConf={currentConf === conferences[virtualColumn.index]}
+              onClick={() => setCurrentConf(conferences[virtualColumn.index])}
             >
-              {conferences[virtualColumn.index].Name}
+              {conferences[virtualColumn.index]}
             </S.ListItem>
           );
         })}
