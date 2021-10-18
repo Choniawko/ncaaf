@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { LeagueTable } from "./LeagueTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { FC } from "react";
-import { Team, TeamStatsItem } from "../league";
-import { TeamStatsContext } from "../LeagueOverview/teamStatsService";
+import { Team, TeamStatsItem } from "../../league";
+import { TeamStatsContext } from "../teamStatsService";
 
 const bookServiceMock = {
   getTeamStatsById: (teamId: number) => ({} as TeamStatsItem),

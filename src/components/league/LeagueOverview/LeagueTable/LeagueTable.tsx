@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useTable } from "react-table";
-import { Team } from "../league";
-import { useTeamStatsService } from "../LeagueOverview/teamStatsService";
-import * as S from "./LeagueTable.styles";
+import { Team } from "../../league";
+import { useTeamStatsService } from "../teamStatsService";
+import * as S from "./LeagueTable.style";
 import { columns, getTableData } from "./LeagueTable.utils";
 
 interface Props {
@@ -40,12 +40,14 @@ export const LeagueTable: FC<Props> = ({ teams }) => {
                 {row.cells.map((cell: any, index: number) => {
                   return (
                     <td {...cell.getCellProps()}>
-                      {index === 0 && (
-                        <span>
-                          <img src={row.original.TeamLogoUrl} alt='' style={{ width: "30px" }} />
-                        </span>
-                      )}
-                      {cell.render("Cell")}
+                      <div style={{ minHeight: "35px", display: "flex", alignItems: "center" }}>
+                        {index === 0 && (
+                          <span style={{ marginRight: "10px" }}>
+                            <img src={row.original.TeamLogoUrl} alt='' style={{ width: "30px" }} />
+                          </span>
+                        )}
+                        {cell.render("Cell")}
+                      </div>
                     </td>
                   );
                 })}

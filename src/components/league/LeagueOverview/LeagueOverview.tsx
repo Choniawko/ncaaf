@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import { fetchData } from "../../../common/services/api";
-import { groupBy, Grouped } from "../../../common/utils/dataParse";
-import { ConferenceRow } from "../ConferenceRow/ConferenceRow";
+import { fetchData } from "common/services/api";
+import { groupBy, Grouped } from "common/utils/dataParse";
+import { ConferenceRow } from "./ConferenceRow/ConferenceRow";
 import { Conference, TeamStatsItem } from "../league";
-import { LeagueTable } from "../LeagueTable/LeagueTable";
-import * as S from "./LeagueOverview.styles";
+import { LeagueTable } from "./LeagueTable/LeagueTable";
+import * as S from "./LeagueOverview.style";
 import { PROP_TO_GROUP } from "./LeagueOverview.utils";
 import { useTeamStatsService } from "./teamStatsService";
 
@@ -35,7 +35,6 @@ export const LeagueOverview = () => {
     () => (groupByConf(conferences || []) as Grouped<any>) || {},
     [conferences],
   );
-
   if (conferencesIsLoading || teamsIsLoading) return <div>Loading...</div>;
   return conferences && teamSeasonStats ? (
     <S.Container>
@@ -46,7 +45,7 @@ export const LeagueOverview = () => {
         />
       )}
       <S.TableContainer>
-        {groupedConferences[currentConf].map((conference: Conference) => {
+        {groupedConferences[currentConf]?.map((conference: Conference) => {
           return (
             <S.RegionContainer key={conference.ConferenceID}>
               <div>{conference.Name}</div>

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { LeagueOverview } from "./LeagueOverview";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LeagueOverview } from "./LeagueOverview";
 import { TeamStatsContext } from "./teamStatsService";
 import { TeamStatsItem } from "../league";
 

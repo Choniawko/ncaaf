@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import { useVirtual } from "react-virtual";
-import * as S from "./ConferenceRow.styles";
+import * as S from "./ConferenceRow.style";
 
 interface Props {
   conferences: string[];

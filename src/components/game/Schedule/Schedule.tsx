@@ -2,9 +2,9 @@ import { useQuery } from "react-query";
 import { Card } from "primereact/card";
 import { format } from "date-fns";
 import { Game } from "../game";
-import { groupBy } from "../../../common/utils/dataParse";
-import * as S from "./Schedule.styles";
-import { fetchData } from "../../../common/services/api";
+import { groupBy } from "common/utils/dataParse";
+import { fetchData } from "common/services/api";
+import * as S from "./Schedule.style";
 import { DATE_FORMAT, PROP_TO_GROUP, SEASON } from "./Schedule.utils";
 
 const groupByWeek = groupBy(PROP_TO_GROUP);

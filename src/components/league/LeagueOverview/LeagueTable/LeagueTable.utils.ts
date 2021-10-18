@@ -1,4 +1,4 @@
-import { Team } from "../league";
+import { Team } from "../../league";
 
 export const getTableData = (teams: Team[]) =>
   teams.map(
