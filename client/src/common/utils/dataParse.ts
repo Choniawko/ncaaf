@@ -15,3 +15,12 @@ export const groupBy: GroupBy<dataObj> = (key) => (arr) =>
     }),
     {} as Grouped<dataObj>,
   );
+
+export const sortBy = (prop: string) => (arr: dataObj[]) =>
+  [...arr]
+    .map((el) => (el[prop] ? el : { ...el, [prop]: 26 }))
+    .sort((a, b) => {
+      if (a[prop] > b[prop]) return 1;
+      if (a[prop] < b[prop]) return -1;
+      return 0;
+    });

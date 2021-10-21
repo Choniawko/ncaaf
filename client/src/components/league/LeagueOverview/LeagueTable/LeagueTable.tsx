@@ -22,24 +22,24 @@ export const LeagueTable: FC<Props> = ({ teams }) => {
 
   return (
     <S.Container>
-      <table {...getTableProps()}>
-        <thead>
+      <S.Table {...getTableProps()}>
+        <S.THead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <S.THRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <S.Th {...column.getHeaderProps()}>{column.render("Header")}</S.Th>
               ))}
-            </tr>
+            </S.THRow>
           ))}
-        </thead>
-        <tbody {...getTableProps()}>
+        </S.THead>
+        <S.TBody {...getTableProps()}>
           {rows.map((row: any) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <S.TRow {...row.getRowProps()}>
                 {row.cells.map((cell: any, index: number) => {
                   return (
-                    <td {...cell.getCellProps()}>
+                    <S.Td {...cell.getCellProps()}>
                       <div style={{ minHeight: "35px", display: "flex", alignItems: "center" }}>
                         {index === 0 && (
                           <span style={{ marginRight: "10px" }}>
@@ -48,14 +48,14 @@ export const LeagueTable: FC<Props> = ({ teams }) => {
                         )}
                         {cell.render("Cell")}
                       </div>
-                    </td>
+                    </S.Td>
                   );
                 })}
-              </tr>
+              </S.TRow>
             );
           })}
-        </tbody>
-      </table>
+        </S.TBody>
+      </S.Table>
     </S.Container>
   );
 };

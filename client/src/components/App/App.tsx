@@ -22,6 +22,9 @@ function App() {
         <Route path='/teams'>
           <TeamOverview />
         </Route>
+        <Route>
+          <div>No Match</div>
+        </Route>
         <Redirect to='league' />
       </Switch>
     </div>

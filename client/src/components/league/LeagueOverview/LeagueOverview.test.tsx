@@ -23,7 +23,7 @@ const wrapper: FC = ({ children }) => (
 );
 
 describe("LeagueOverview", () => {
-  test.only("renders conference row", async () => {
+  test("renders conference row", async () => {
     render(<LeagueOverview />, { wrapper });
     const conferenceList = await waitFor(() => screen.getByRole("list"));
     expect(conferenceList).toBeInTheDocument();

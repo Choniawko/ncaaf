@@ -4,6 +4,9 @@ import { fetchData } from "common/services/api";
 import { usePagination } from "./usePagination";
 import { TeamDetails } from "./TeamDetails/TeamDetails";
 import { TeamPagination } from "./TamPagination/TeamPagination";
+import { sortBy } from "common/utils/dataParse";
+
+const sortByApRank = sortBy("ApRank");
 
 export const TeamOverview = () => {
   const { data: teams, isLoading } = useQuery<Team[]>("teams", () => fetchData("/Teams"));
@@ -11,6 +14,7 @@ export const TeamOverview = () => {
     perPage: 10,
     count: teams?.length || 0,
   });
+  console.log("sorted", sortByApRank(teams || []));
   if (isLoading) return <div>Loading...</div>;
   return teams ? (
     <div>

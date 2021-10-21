@@ -30,7 +30,6 @@ export const LeagueOverview = () => {
       onSuccess: setTeamStats,
     },
   );
-
   const groupedConferences = useMemo(
     () => (groupByConf(conferences || []) as Grouped<any>) || {},
     [conferences],
